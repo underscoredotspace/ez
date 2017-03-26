@@ -5,15 +5,17 @@ var app = express()
 var https = require('https')
 
 var req = {
-  hostname: 'https://www.reddit.com',
-  path: '/api/v1/authorize'
-*/
+  hostname: 'www.reddit.com',
+  port: 443,
+  path: '/api/v1/authorize',
+  method: 'GET'
+}
 
 var options = {
   client_id: process.env.CLIENT_ID,
   response_type:'code',
   state:'test',
-  redirect_uri:'',
+  redirect_uri:'https://understood-bird.glitch.me/reddit',
   duration:'permanent',
   scope:'read'
 }
