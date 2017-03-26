@@ -1,5 +1,6 @@
 // init project
 var express = require('express')
+var bodyParser = require('body-parser')
 var app = express()
 //var snoowrap = require('snoowrap')
 var request = require('request')
@@ -23,7 +24,9 @@ var querystring = qs.stringify({
 
 var url = 'https://www.reddit.com/api/v1/authorize'
 
-//request.get({url: url, qs: querystring})
+request.get({url: url, qs: querystring}), (error, response, body) => {
+  console.log(response)
+}
 
 /*
 const r = new snoowrap({
@@ -43,7 +46,7 @@ app.get('/', (req, res) => {
   res.send('<title>Test Page</title><body>Nothing to see here</body>');
 });
 
-app.post('/reddit', (req, res) => {
+app.post('/reddit', bodyParser.json(), (req, res) => {
   
 })
 
