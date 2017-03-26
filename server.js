@@ -7,7 +7,6 @@ var request = require('request')
 
 var form = {
   grant_type: 'client_credentials',
-  code:'test',
   redirect_uri:'https://understood-bird.glitch.me/reddit',
 }
 
@@ -32,7 +31,6 @@ app.get('/', (req, res) => {
   res.send('<title>Test Page</title><body>Nothing to see here</body>');
   request.post({url: url, form: form, auth: auth}), function(err, res, body) {
     console.log(res)
-    console.log('done')
   }
 });
 
