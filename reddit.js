@@ -1,10 +1,10 @@
 var request = require('request')
 
-var reddit = () => {
+function Reddit() {
   this.accessToken = null
 }
 
-reddit.prototype.newAccessToken = (cb) => {
+Reddit.prototype.newAccessToken = (cb) => {
   var options = {
     url: 'https://www.reddit.com/api/v1/access_token', 
     method: 'POST',
@@ -14,22 +14,28 @@ reddit.prototype.newAccessToken = (cb) => {
   
   request(options, function(err, response, body) {
     setTimeout(() => {
-      reddit.accessToken = null
+      this.accessToken = null
     }, body.expires_in)
     
-    reddit.accessToken = body.access_token
+    this.accessToken = body.access_token
     
     if (cb) {
-      cb(reddit.accessToken)
+      cb(this.accessToken)
     }
   })
 }
 
-reddit.prototype.getAccessToken = () => {
-  
+Reddit.prototype.getAccessToken = () => {
+  if (!this.accessToken) {
+    this.newAccessToken((token)=>{
+      return token
+    })
+  } else {
+    return this.accessToken
+  }
 }
 
-module.exports = reddit
+module.exports = Reddit
 
 /*
 var reddit = {

@@ -2,13 +2,12 @@
 var express = require('express')
 var bodyParser = require('body-parser')
 var app = express()
-var request = require('request')
+var reddit = new require('./reddit')
 
 app.use((req, res, next) =>{
   console.log(req.method, req.url)
   next()
 })
-
 
 app.use('/login/callback', (req, res) => {
   res.json({ok: 'ok'})
