@@ -1,22 +1,31 @@
 // init project
 var express = require('express')
 var app = express()
-var snoowrap = require('snoowrap')
+//var snoowrap = require('snoowrap')
+var https = require('https')
 
-https://www.reddit.com/api/v1/authorize
-?client_id=
-&response_type=code
-&state=
-&redirect_uri=
-&duration=permanent
-&scope=read
+var req = {
+  hostname: 'https://www.reddit.com',
+  path: '/api/v1/authorize'
+*/
 
+var options = {
+  client_id: process.env.CLIENT_ID,
+  response_type:'code',
+  state:'test',
+  redirect_uri:'',
+  duration:'permanent',
+  scope:'read'
+}
+
+/*
 const r = new snoowrap({
   userAgent: 'snoowrap-test',
   clientId: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
   refreshToken: 'put your refresh token here'
 });
+*/
 
 app.use((req, res, next) =>{
   console.log(req.method, req.url)
