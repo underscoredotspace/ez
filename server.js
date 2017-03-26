@@ -9,8 +9,7 @@ app.use((req, res, next) =>{
   next()
 })
 
-var reddit = function(){
-  return {
+var reddit = {
   accessToken: null,
   newAccessToken: function(callback) {
     var options = {
@@ -20,19 +19,17 @@ var reddit = function(){
       auth: {user: process.env.CLIENT_ID, pass: process.env.CLIENT_SECRET}
     }
     request(options, function(err, response, body) {
-      self = this
       setTimeout(() => {
-        self.accessToken = null
+        reddit.accessToken = null
       }, body.expires_in)
-      this.accessToken = body.access_token
+      reddit.accessToken = body.access_token
       if (callback) {
-        callback(this.accessToken)
+        callback(reddit.accessToken)
       }
     })
   },
   getAccessToken: () => {
-    self = this
-    if (!this.accessToken) {
+    if (!reddit.accessToken) {
       console.log(this)
       self.newAccessToken((token)=>{
         return token
@@ -42,6 +39,7 @@ var reddit = function(){
     }
   }
 }
+
 
 app.use('/login/callback', (req, res) => {
   res.json({ok: 'ok'})
@@ -64,4 +62,4 @@ app.use(express.static('public'))
 // listen for requests :)
 var listener = app.listen(process.env.PORT, () => {
   console.log('Your app is listening on port ' + listener.address().port);
-});
+})
