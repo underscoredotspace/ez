@@ -2,26 +2,28 @@
 var express = require('express')
 var app = express()
 //var snoowrap = require('snoowrap')
-var https = require('https')
-var querystring = require('querystring')
+var request = require('request')
+var qs = require('querystring')
 
-var querystring = {
+var querystring = qs.stringify({
   client_id: process.env.CLIENT_ID,
   response_type:'code',
   state:'test',
   redirect_uri:'https://understood-bird.glitch.me/reddit',
   duration:'permanent',
   scope:'read'
-}
+})
 
-var req = {
-  hostname: 'www.reddit.com',
-  port: 443,
-  path: '/api/v1/authorize',
-  method: 'GET'
-}
+// var req = {
+//   host: 'www.reddit.com',
+//   port: 443,
+//   path: '/api/v1/authorize?',
+//   method: 'GET'
+// }
 
-//https.request()
+var url = 'https://www.reddit.com/api/v1/authorize'
+
+//request.get({url: url, qs: querystring})
 
 /*
 const r = new snoowrap({
