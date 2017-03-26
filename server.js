@@ -19,9 +19,9 @@ var postData = querystring.stringify({
 })
 
 var options = {
-  hostname: 'https://oauth.reddit.com',
+  hostname: 'https://www.reddit.com',
   port: 80,
-  path: '/grants/installed_client',
+  path: '/api/v1/access_token',
   method: 'POST'
 }
 
@@ -31,6 +31,8 @@ app.get('/', function(req, res) {
 //   })
   res.send('Ok');
 });
+
+    
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
