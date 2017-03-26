@@ -11,28 +11,23 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(expressSession({ secret:'getfucked', resave: true, saveUninitialized: true }));
 
-var http = require('http')
+var http = require('https')
 var querystring = require('querystring')
 
-var postData = querystring.stringify({
-    grant_type:'client_credentials'
-})
-
-var options = {
-  hostname: 'https://www.reddit.com',
-  port: 80,
-  path: '/api/v1/access_token',
-  method: 'POST'
+var getToken_options = {
+  
 }
 
 app.get('/', function(req, res) {
-//   var req = http.request(options, (res) => {
+//   var req = https.request(options, (res) => {
     
 //   })
   res.send('Ok');
 });
 
-    
+app.get('/about', (req, res) => {
+  res.send('This is just  test for now, not for your use. ')
+})
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
