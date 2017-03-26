@@ -6,13 +6,14 @@ var app = express()
 var request = require('request')
 
 var form = {
-  grant_type: 'authorization_code',
+  grant_type: 'client_credentials',
   code:'test',
   redirect_uri:'https://understood-bird.glitch.me/reddit',
 }
 
-var url = form.redirect_uri //'https://www.reddit.com/api/v1/access_token'
-var auth = {user: process.env.CLIENT_ID, pass: process.env.CLIENT_SECRET}
+var url = form.redirect_uri
+// var url = 'https://www.reddit.com/api/v1/access_token'
+var auth = {user: process.env.CLIENT_ID, password: process.env.CLIENT_SECRET}
 /*
 const r = new snoowrap({
   userAgent: 'snoowrap-test',
@@ -24,18 +25,19 @@ const r = new snoowrap({
 
 app.use((req, res, next) =>{
   console.log(req.method, req.url)
+  console.log(req.body)
   next()
 })
 
 app.get('/', (req, res) => {
   res.send('<title>Test Page</title><body>Nothing to see here</body>');
-  request.post({url: url, form: form, auth: auth}), (err, res, body) => {
-  console.log(res)
-}
+  request.post({url: url, form: form, auth: auth}), function(err, res, body) {
+    console.log(res)
+    console.log('done')
+  }
 });
 
 app.use('/reddit', bodyParser.json(), (req, res) => {
-  console.log(req)
   res.sendStatus(200)
 })
 
