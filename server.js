@@ -3,6 +3,16 @@ var express = require('express')
 var app = express()
 //var snoowrap = require('snoowrap')
 var https = require('https')
+var querystring = require('querystring')
+
+var querystring = {
+  client_id: process.env.CLIENT_ID,
+  response_type:'code',
+  state:'test',
+  redirect_uri:'https://understood-bird.glitch.me/reddit',
+  duration:'permanent',
+  scope:'read'
+}
 
 var req = {
   hostname: 'www.reddit.com',
@@ -11,14 +21,7 @@ var req = {
   method: 'GET'
 }
 
-var options = {
-  client_id: process.env.CLIENT_ID,
-  response_type:'code',
-  state:'test',
-  redirect_uri:'https://understood-bird.glitch.me/reddit',
-  duration:'permanent',
-  scope:'read'
-}
+//https.request()
 
 /*
 const r = new snoowrap({
