@@ -4,29 +4,17 @@ var bodyParser = require('body-parser')
 var app = express()
 //var snoowrap = require('snoowrap')
 var request = require('request')
-var qs = require('querystring')
 
-var querystring = qs.stringify({
+var querystring = {
   client_id: process.env.CLIENT_ID,
   response_type:'code',
-  state:'test',
+  state:'fdsafd',
   redirect_uri:'https://understood-bird.glitch.me/reddit',
   duration:'permanent',
   scope:'read'
-})
-
-// var req = {
-//   host: 'www.reddit.com',
-//   port: 443,
-//   path: '/api/v1/authorize?',
-//   method: 'GET'
-// }
+}
 
 var url = 'https://www.reddit.com/api/v1/authorize'
-
-request.get({url: url, qs: querystring}), (error, response, body) => {
-  console.log(response)
-}
 
 /*
 const r = new snoowrap({
@@ -44,10 +32,18 @@ app.use((req, res, next) =>{
 
 app.get('/', (req, res) => {
   res.send('<title>Test Page</title><body>Nothing to see here</body>');
+  request.get({url: url, qs: querystring}), (err, res, body) => {
+  if (err) {
+    console.log(err)
+  } else {
+    console.log(res)
+  }
+}
 });
 
-app.post('/reddit', bodyParser.json(), (req, res) => {
-  
+app.use('/reddit', bodyParser.json(), (req, res) => {
+  console.log(req.body)
+  res.sendStatus(200)
 })
 
 app.get('/about', (req, res) => {
