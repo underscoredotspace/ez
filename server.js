@@ -12,10 +12,16 @@ app.use(cookieParser());
 app.use(expressSession({ secret:'getfucked', resave: true, saveUninitialized: true }));
 
 var http = require('http')
+var querystring = require('querystring')
+
+var postData = querystring.stringify({
+    grant_type:'client_credentials'
+})
 
 var options = {
-  hostname: 'https://www.reddit.com',
-  path: '/api/v1/access_token',
+  hostname: 'https://oauth.reddit.com',
+  port: 80,
+  path: '/grants/installed_client',
   method: 'POST'
 }
 
