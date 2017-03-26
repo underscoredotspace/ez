@@ -32,7 +32,7 @@ var reddit = {
   getAccessToken: () => {
     self = this
     if (!this.accessToken) {
-      console.log(this.newAccessToken)
+      console.log(this)
       self.newAccessToken((token)=>{
         return token
       })
