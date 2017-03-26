@@ -14,7 +14,9 @@ app.use(expressSession({ secret:'getfucked', resave: true, saveUninitialized: tr
 var http = require('http')
 
 var options = {
-  hostname: 'https://reddit.com/api/v1/get_token'
+  hostname: 'https://www.reddit.com',
+  path: '/api/v1/access_token',
+  method: 'POST'
 }
 
 app.get('/', function(req, res) {
