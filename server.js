@@ -1,8 +1,14 @@
 // init project
 var express = require('express')
 var app = express()
+var snoowrap = require('snoowrap')
 
-var reddit = require('raw.js')
+const r = new snoowrap({
+  userAgent: 'snoowrap-test',
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  refreshToken: 'put your refresh token here'
+});
 
 app.use((req, res, next) =>{
   console.log(req.method, req.url)
