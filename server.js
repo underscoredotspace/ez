@@ -9,7 +9,8 @@ app.use((req, res, next) =>{
   next()
 })
 
-var reddit = {
+var reddit = function(){
+  return {
   accessToken: null,
   newAccessToken: function(callback) {
     var options = {
