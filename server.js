@@ -1,27 +1,11 @@
 // init project
-var express = require('express');
-var app = express();
-var expressSession = require('express-session');
+var express = require('express')
+var app = express()
 
-// cookies are used to save authentication
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
+var reddit = require('raw.js')
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(cookieParser());
-app.use(expressSession({ secret:'getfucked', resave: true, saveUninitialized: true }));
-
-var http = require('https')
-var querystring = require('querystring')
-
-var getToken_options = {
-  
-}
-
-app.get('/', function(req, res) {
-//   var req = https.request(options, (res) => {
-    
-//   })
+app.use((req, res))
+app.get('/', (req, res) => {
   res.send('Ok');
 });
 
@@ -30,6 +14,6 @@ app.get('/about', (req, res) => {
 })
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function() {
+var listener = app.listen(process.env.PORT, () => {
   console.log('Your app is listening on port ' + listener.address().port);
 });
