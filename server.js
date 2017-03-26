@@ -2,25 +2,13 @@
 var express = require('express')
 var bodyParser = require('body-parser')
 var app = express()
-//var snoowrap = require('snoowrap')
 var request = require('request')
 
-var form = {
-  grant_type: 'client_credentials',
-  redirect_uri:'https://understood-bird.glitch.me/reddit',
+var options = {
+  url: 'https://www.reddit.com/api/v1/access_token', 
+  form: {grant_type: 'client_credentials'}
 }
-
-var url = form.redirect_uri
-// var url = 'https://www.reddit.com/api/v1/access_token'
 var auth = {user: process.env.CLIENT_ID, pass: process.env.CLIENT_SECRET}
-/*
-const r = new snoowrap({
-  userAgent: 'snoowrap-test',
-  clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
-  refreshToken: 'put your refresh token here'
-});
-*/
 
 app.use((req, res, next) =>{
   console.log(req.method, req.url)
@@ -28,15 +16,13 @@ app.use((req, res, next) =>{
 })
 
 app.get('/', (req, res) => {
-  //res.send('<title>Test Page</title><body>Nothing to see here</body>');
-  request.post({url: url, form: form, auth: auth}), function(err, res, body) {
+  request.post({url: url, body: form, auth: auth}), function(err, res, body) {
     res.send(body)
-    return
   }
 });
 
-app.use('/reddit', bodyParser.json(), (req, res) => {
-  res.json({body: req.body})
+app.use('/reddit', (req, res) => {
+  res.json({ok: 'ok'})
 })
 
 app.get('/about', (req, res) => {
@@ -49,34 +35,22 @@ var listener = app.listen(process.env.PORT, () => {
 });
 
 /*
-request({
-    // will be ignored 
-    method: 'POST',
-    uri: 'http://www.google.com',
- 
-    // HTTP Archive Request Object 
-    har: {
-      url: 'http://www.mockbin.com/har',
-      method: 'POST',
-      headers: [
-        {
-          name: 'content-type',
-          value: 'application/x-www-form-urlencoded'
-        }
-      ],
-      postData: {
-        mimeType: 'application/x-www-form-urlencoded',
-        params: [
-          {
-            name: 'foo',
-            value: 'bar'
-          },
-          {
-            name: 'hello',
-            value: 'world'
-          }
-        ]
-      }
-    }
-  })
+var request = require("request");
+
+var options = { 
+method: 'POST',
+  url: 'https://www.reddit.com/api/v1/access_token',
+  
+  headers: 
+   {
+     'content-type': 'application/x-www-form-urlencoded',
+     authorization: 'Basic ZDNIU2NZRThCR0dBY2c6eTNsN3RFWHcxMG1uTzdmUHV0aW1vYjBTWFBv' },
+  form: { grant_type: 'client_credentials' } };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+
 */
