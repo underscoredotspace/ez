@@ -19,6 +19,10 @@ app.get('/', (req, res) => {
   res.send('<title>Test Page</title><body>Nothing to see here</body>');
 });
 
+app.post('/reddit', (req, res) => {
+  
+})
+
 app.get('/about', (req, res) => {
   res.send('This is just  test for now, not for your use. ')
 })
