@@ -5,18 +5,20 @@ var app = express()
 //var snoowrap = require('snoowrap')
 var request = require('request')
 
-var querystring = {
-  client_id: process.env.CLIENT_ID,
-  response_type:'code',
-  state:'fdsafd',
+var form = {
+  grant_type: 'authorization_code', 
+  code: 'code', 
   redirect_uri:'https://understood-bird.glitch.me/reddit',
-  duration:'permanent',
-  scope:'read'
 }
 
-var url = 'https://www.reddit.com/api/v1/authorize'
-
+var url = 'https://www.reddit.com/api/v1/access_token'
+var auth = {user: process.env.CLIENT_ID, pass: process.env.CLIENT_SECRET}
 /*
+
+        uri: 'access_token',
+         || ''},
+        form: {grant_type: 'authorization_code', code: query.code, redirect_uri: expected_redirect_uri}
+        
 const r = new snoowrap({
   userAgent: 'snoowrap-test',
   clientId: process.env.CLIENT_ID,
@@ -32,7 +34,7 @@ app.use((req, res, next) =>{
 
 app.get('/', (req, res) => {
   res.send('<title>Test Page</title><body>Nothing to see here</body>');
-  request.get({url: url, qs: querystring}), (err, res, body) => {
+  request.post({url: url, form: form, auth: auth}), (err, res, body) => {
   if (err) {
     console.log(err)
   } else {
@@ -42,7 +44,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/reddit', bodyParser.json(), (req, res) => {
-  console.log(req.body)
+  console.log(req.method)
   res.sendStatus(200)
 })
 
