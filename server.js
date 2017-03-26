@@ -11,9 +11,9 @@ var form = {
   redirect_uri:'https://understood-bird.glitch.me/reddit',
 }
 
-var url = form.redirect_uri
-// var url = 'https://www.reddit.com/api/v1/access_token'
-var auth = {user: process.env.CLIENT_ID, password: process.env.CLIENT_SECRET}
+// var url = form.redirect_uri
+var url = 'https://www.reddit.com/api/v1/access_token'
+var auth = {user: process.env.CLIENT_ID, pass: process.env.CLIENT_SECRET, 'sendImmediately': false}
 /*
 const r = new snoowrap({
   userAgent: 'snoowrap-test',
@@ -25,7 +25,6 @@ const r = new snoowrap({
 
 app.use((req, res, next) =>{
   console.log(req.method, req.url)
-  console.log(req.body)
   next()
 })
 
@@ -38,7 +37,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/reddit', bodyParser.json(), (req, res) => {
-  res.sendStatus(200)
+  res.json({body: 'yes'})
 })
 
 app.get('/about', (req, res) => {
