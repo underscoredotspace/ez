@@ -4,12 +4,13 @@ var app = express()
 
 var reddit = require('raw.js')
 
-app.use((req, res) =>{
+app.use((req, res, next) =>{
   console.log(req.method, req.url)
+  next()
 })
 
 app.get('/', (req, res) => {
-  res.send('Ok');
+  res.send('<title>Test Page</title><body>Nothing to see here</body>');
 });
 
 app.get('/about', (req, res) => {
