@@ -9,37 +9,6 @@ app.use((req, res, next) =>{
   next()
 })
 
-var reddit = {
-  accessToken: null,
-  newAccessToken: function(callback) {
-    var options = {
-      url: 'https://www.reddit.com/api/v1/access_token', 
-      method: 'POST',
-      form: {grant_type: 'client_credentials'},
-      auth: {user: process.env.CLIENT_ID, pass: process.env.CLIENT_SECRET}
-    }
-    request(options, function(err, response, body) {
-      setTimeout(() => {
-        reddit.accessToken = null
-      }, body.expires_in)
-      reddit.accessToken = body.access_token
-      if (callback) {
-        callback(reddit.accessToken)
-      }
-    })
-  },
-  getAccessToken: () => {
-    if (!reddit.accessToken) {
-      console.log(this)
-      self.newAccessToken((token)=>{
-        return token
-      })
-    } else {
-      return this.accessToken
-    }
-  }
-}
-
 
 app.use('/login/callback', (req, res) => {
   res.json({ok: 'ok'})
@@ -50,7 +19,7 @@ app.get('/about', (req, res) => {
 })
 
 app.get('/token', (req, res) => {
-  res.send(reddit.getAccessToken())
+  console.log(reddit.getAccessToken())
 })
 
 app.get('hot', (req, res) => {
