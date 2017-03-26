@@ -3,6 +3,14 @@ var express = require('express')
 var app = express()
 var snoowrap = require('snoowrap')
 
+https://www.reddit.com/api/v1/authorize
+?client_id=
+&response_type=code
+&state=
+&redirect_uri=
+&duration=permanent
+&scope=read
+
 const r = new snoowrap({
   userAgent: 'snoowrap-test',
   clientId: process.env.CLIENT_ID,
