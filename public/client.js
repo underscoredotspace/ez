@@ -2,13 +2,12 @@ angular.module('reddit', [])
 
 .service('r', function($http) {
   return {
-    subReddit: function(sub) {
+    subReddit: function(sub, cb) {
       $http.get('/r/' + sub).then(
         function(res) {
-          console.log(res)
-          return {data: res.data}
+          cb({data: res.data})
         }, function(res) {
-          return {error: res}
+          return ({error: res})
         }
       )
     }
@@ -22,7 +21,9 @@ angular.module('reddit', [])
       return {
         pre: function(scope, element, attribs) {
           element.bind('click', function(e) {
-            r.subReddit(attribs.rSub)
+            r.subReddit(attribs.rSub, function(data) {
+              console.log(data.data)
+            })
           })
         }
       }
