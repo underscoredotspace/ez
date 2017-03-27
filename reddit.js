@@ -36,6 +36,7 @@ Reddit.prototype.getAccessToken = () => {
 }
 
 var r = new Reddit
+console.log(r)
 
 module.exports = r
 
