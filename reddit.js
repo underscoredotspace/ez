@@ -49,10 +49,16 @@ var _apiRequest = (which, cb) => {
   })
 }
 
+var getComments = (reddit, postid, cb) => {
+  _apiRequest('/r/' + reddit + '/comments/' + postid, (res)=>{
+    cb(res)
+  })
+}
+
 var getSubReddit = (reddit, cb) => {
   _apiRequest('/r/' + reddit, (res)=>{
     cb(res)
   })
 }
 
-module.exports = {access_token, getSubReddit}
+module.exports = {access_token, getSubReddit, getComments}
