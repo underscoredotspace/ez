@@ -30,6 +30,7 @@ app.get('/r/:reddit/comments/:postid', (req, res) => {
 })
 
 app.use(express.static('public'))
+app.use('/bower_components/', express.static('bower_components'))
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, () => {

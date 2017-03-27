@@ -4,6 +4,7 @@
 	"description": "What am I about?",
 	"main": "server.js",
 	"scripts": {
+    "install": "bower install",
 		"start": "node server.js"
 	},
 	"dependencies": {
