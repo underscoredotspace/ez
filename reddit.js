@@ -37,7 +37,10 @@ var _apiRequest = (which, cb) => {
   access_token((token)=>{
     var options = {
       url: 'https://oauth.reddit.com' + which,
-      auth: {bearer: token}
+      auth: {bearer: token},
+      headers: {
+        'User-Agent': 'https://glitch.me/~understood-bird by /u/_DotSpace'
+      }
     }
 
     request(options, (err, res, body)=>{
