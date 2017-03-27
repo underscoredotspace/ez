@@ -10,24 +10,23 @@ var newAccessToken = (cb) => {
   }
 
   request(options, function(err, response, body) {
-
+    var oBody = JSON.parse(body)
     setTimeout(() => {
       accessToken = null
-    }, Number(body.expires_in) * 1000)
+    }, Number(oBody.expires_in) * 1000)
     
-    accessToken = JSON.parse(body).access_token
+    accessToken = oBody.access_token
 
-    if (cb) {
-      cb(accessToken)
-    }
+    if (cb) cb()
   })
 }
 
 var getAccessToken =() => {
   if (!accessToken) {
-    newAccessToken((token)=>{
+    // the problem here is that I'm not actually returning anything to getAccessToken
+    newAccessToken(()=>{
       console.log({got: accessToken})
-      return token
+      return accessToken
     })
   } else {
     console.log({saved: accessToken})
