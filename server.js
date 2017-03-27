@@ -24,8 +24,9 @@ app.get('/token', (req, res) => {
 })
 
 app.get('/r/:reddit', (req, res) => {
-  r.getSubReddit(req.params.reddit)
-  res.send(req.params)
+  r.getSubReddit(req.params.reddit, (subreddit) => {
+    res.send(subreddit)
+  })
 })
 
 app.use(express.static('public'))

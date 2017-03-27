@@ -33,4 +33,11 @@ var access_token =(cb) => {
   }
 }
 
-module.exports = {access_token}
+var getSubReddit = (reddit, cb) => {
+  access_token((token)=>{
+    
+  })
+  cb(reddit)
+}
+
+module.exports = {access_token, getSubReddit}
