@@ -19,7 +19,9 @@ app.get('/about', (req, res) => {
 
 app.get('/token', (req, res) => {
   res.send('tes')
-  console.log({token: r.getAccessToken()})
+  r.getAccessToken((token) => {
+    console.log(token)
+  })
 })
 
 app.get('hot', (req, res) => {

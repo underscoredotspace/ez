@@ -17,20 +17,18 @@ var newAccessToken = (cb) => {
     
     accessToken = oBody.access_token
 
-    if (cb) cb()
+    if (cb) cb(accessToken)
   })
 }
 
-var getAccessToken =() => {
+var getAccessToken =(cb) => {
   if (!accessToken) {
-    // the problem here is that I'm not actually returning anything to getAccessToken
-    newAccessToken(()=>{
-      console.log({got: accessToken})
-      return accessToken
+    newAccessToken((token)=>{
+      cb(accessToken)
     })
   } else {
     console.log({saved: accessToken})
-    return accessToken
+    cb(accessToken)
   }
 }
 
