@@ -18,7 +18,8 @@ app.get('/about', (req, res) => {
 })
 
 app.get('/token', (req, res) => {
-  res.send(r.getAccessToken())
+  res.send('tes')
+  console.log({token: r.getAccessToken()})
 })
 
 app.get('hot', (req, res) => {

@@ -10,12 +10,12 @@ var newAccessToken = (cb) => {
   }
 
   request(options, function(err, response, body) {
+
     setTimeout(() => {
       accessToken = null
     }, Number(body.expires_in) * 1000)
-
-
-    accessToken = body.access_token
+    
+    accessToken = JSON.parse(body).access_token
 
     if (cb) {
       cb(accessToken)
@@ -26,9 +26,11 @@ var newAccessToken = (cb) => {
 var getAccessToken =() => {
   if (!accessToken) {
     newAccessToken((token)=>{
+      console.log({got: accessToken})
       return token
     })
   } else {
+    console.log({saved: accessToken})
     return accessToken
   }
 }
