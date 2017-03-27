@@ -17,12 +17,6 @@ app.get('/about', (req, res) => {
   res.send('This is just  test for now, not for your use. ')
 })
 
-app.get('/token', (req, res) => {
-  r.getAccessToken((token) => {
-    res.send(token)
-  })
-})
-
 app.get('/r/:reddit', (req, res) => {
   r.getSubReddit(req.params.reddit, (subreddit) => {
     res.send(subreddit)

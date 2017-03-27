@@ -33,11 +33,23 @@ var access_token =(cb) => {
   }
 }
 
-var getSubReddit = (reddit, cb) => {
+var _apiRequest = (which, cb) => {
   access_token((token)=>{
-    
+    var options = {
+      url: 'https://oauth.reddit.com' + which,
+      auth: {bearer: token}
+    }
+
+    request(options, (err, res, body)=>{
+      cb(body)
+    })
   })
-  cb(reddit)
+}
+
+var getSubReddit = (reddit, cb) => {
+  _apiRequest('/r/' + reddit, (res)=>{
+    cb(res)
+  })
 }
 
 module.exports = {access_token, getSubReddit}
