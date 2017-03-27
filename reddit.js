@@ -44,7 +44,7 @@ var _apiRequest = (which, cb) => {
     }
 
     request(options, (err, res, body)=>{
-      cb(body)
+      cb(JSON.parse(body))
     })
   })
 }

@@ -20,13 +20,13 @@ app.get('/about', (req, res) => {
 
 app.get('/r/:reddit', (req, res) => {
   r.getSubReddit(req.params.reddit, (subreddit) => {
-    res.json(JSON.parse(subreddit).data.children)
+    res.json(subreddit.data.children)
   })
 })
 
 app.get('/r/:reddit/comments/:postid', (req, res) => {
   r.getComments(req.params.reddit, req.params.postid, (comments) => {
-    res.json(JSON.parse(comments))[1].data.children)
+    res.json(comments)
   })
 })
 
