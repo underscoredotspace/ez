@@ -13,7 +13,7 @@ var _newAccessToken = (cb) => {
     var oBody = JSON.parse(body)
     setTimeout(() => {
       _accessToken = null
-    }, (Number(oBody.expires_in) * 1000) - 1000)
+    }, (Number(oBody.expires_in) * 1000) - 10000)
     
     _accessToken = oBody.access_token
 
@@ -22,13 +22,14 @@ var _newAccessToken = (cb) => {
 }
 
 var access_token =(cb) => {
-  if (!accessToken) {
-    newAccessToken((token)=>{
-      cb(accessToken)
+  if (!_accessToken) {
+    // Request a new token from Reddit, the old one expired or will do in a minute
+    _newAccessToken((token)=>{
+      cb(_accessToken)
     })
   } else {
-    console.log({saved: accessToken})
-    cb(accessToken)
+    // Token already requested from Reddit, still valid
+    cb(_accessToken)
   }
 }
 
