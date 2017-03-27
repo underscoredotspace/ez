@@ -35,7 +35,9 @@ Reddit.prototype.getAccessToken = () => {
   }
 }
 
-module.exports = Reddit
+var r = new Reddit
+
+module.exports = r
 
 /*
 var reddit = {

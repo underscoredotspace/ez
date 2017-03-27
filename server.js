@@ -2,7 +2,7 @@
 var express = require('express')
 var bodyParser = require('body-parser')
 var app = express()
-var reddit = new require('./reddit')
+var r = require('./reddit')
 
 app.use((req, res, next) =>{
   console.log(req.method, req.url)
@@ -18,7 +18,7 @@ app.get('/about', (req, res) => {
 })
 
 app.get('/token', (req, res) => {
-  console.log(reddit.getAccessToken())
+  console.log(r.getAccessToken())
 })
 
 app.get('hot', (req, res) => {
