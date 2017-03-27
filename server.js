@@ -20,7 +20,19 @@ app.get('/about', (req, res) => {
 
 app.get('/r/:reddit', (req, res) => {
   r.getSubReddit(req.params.reddit, (subreddit) => {
-    res.json(JSON.parse(subreddit).data.children[0])
+    res.json(JSON.parse(subreddit).data.children)
+  })
+})
+
+app.get('/r/:reddit/:ndx', (req, res) => {
+  r.getSubReddit(req.params.reddit, (subreddit) => {
+    res.json(JSON.parse(subreddit).data.children[req.params.ndx])
+  })
+})
+
+app.get('/r/:reddit/comments/:postid', (req, res) => {
+  r.getSubReddit(req.params.reddit + '/comments/', (subreddit) => {
+    res.json(JSON.parse(subreddit).data.children[req.params.ndx])
   })
 })
 
