@@ -13,7 +13,7 @@ var newAccessToken = (cb) => {
     var oBody = JSON.parse(body)
     setTimeout(() => {
       accessToken = null
-    }, Number(oBody.expires_in) * 1000)
+    }, (Number(oBody.expires_in) * 1000) - 1000)
     
     accessToken = oBody.access_token
 
