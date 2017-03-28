@@ -10,9 +10,9 @@ var _newAccessToken = () => {
       auth: {user: process.env.CLIENT_ID, pass: process.env.CLIENT_SECRET}
     }
     request(options, function(err, response, body) {
-      // if (err) {
-        reject({err: 'cunt'})
-      // }
+      if (err) {
+        reject(err)
+      }
       var oBody = JSON.parse(body)
       setTimeout(() => {
         _accessToken = null
@@ -42,13 +42,13 @@ var access_token = () => {
 var _apiRequest = (which, cb) => {
   access_token().then((token)=>{
     var options = {
-      url: 'https://oauth.reddit.com' + which,
+      url: 'https://oauth.reddit.co.uk' + which,
       auth: {bearer: token},
       headers: {'User-Agent': 'https://glitch.me/~understood-bird/about by /u/_DotSpace'}
     }
 
     request(options, (err, res, body)=>{
-      cb(JSON.parse(body), null)
+      cb(JSON.parse(body), err)
     })
   }).catch((err) => {
     cb(null, err)
