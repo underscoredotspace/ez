@@ -14,6 +14,7 @@ var _newAccessToken = () => {
       setTimeout(() => {
         _accessToken = null
       }, (Number(oBody.expires_in) * 1000) - 60000)
+      // Token removed 1 minute before it expires
 
       _accessToken = oBody.access_token
 
@@ -39,9 +40,7 @@ var _apiRequest = (which, cb) => {
     var options = {
       url: 'https://oauth.reddit.com' + which,
       auth: {bearer: token},
-      headers: {
-        'User-Agent': 'https://glitch.me/~understood-bird by /u/_DotSpace'
-      }
+      headers: {'User-Agent': 'https://glitch.me/~understood-bird/about by /u/_DotSpace'}
     }
 
     request(options, (err, res, body)=>{
