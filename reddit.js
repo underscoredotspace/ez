@@ -1,4 +1,5 @@
-var request-promise = require('request-promise-native')
+// var request-promise = require('request-promise-native')
+var request = require('request')
 var _accessToken = null
 
 var _newAccessToken = () => {
