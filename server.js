@@ -18,14 +18,22 @@ app.get('/about', (req, res) => {
 })
 
 app.get('/r/:reddit', (req, res) => {
-  r.getSubReddit(req.params.reddit, (subreddit) => {
-    res.json(subreddit.data.children)
+  r.getSubReddit(req.params.reddit, (subreddit, err) => {
+    if (err) {
+      res.sendStatus(500).json({err: err})
+    } else {
+      res.json(subreddit.data.children)
+    }
   })
 })
 
 app.get('/r/:reddit/comments/:postid', (req, res) => {
-  r.getComments(req.params.reddit, req.params.postid, (comments) => {
-    res.json(comments)
+  r.getComments(req.params.reddit, req.params.postid, (comments, err) => {
+    if (err) {
+      res.sendStatus(500).json({err: err})
+    } else {
+      res.json(comments)
+    }
   })
 })
 

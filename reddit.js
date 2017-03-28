@@ -10,6 +10,9 @@ var _newAccessToken = () => {
       auth: {user: process.env.CLIENT_ID, pass: process.env.CLIENT_SECRET}
     }
     request(options, function(err, response, body) {
+      // if (err) {
+        reject(err)
+      // }
       var oBody = JSON.parse(body)
       setTimeout(() => {
         _accessToken = null
@@ -45,20 +48,22 @@ var _apiRequest = (which, cb) => {
     }
 
     request(options, (err, res, body)=>{
-      cb(JSON.parse(body))
+      cb(JSON.parse(body), null)
     })
+  }).catch((err)=>{
+    cb(null, err)
   })
 }
 
 var getComments = (reddit, postid, cb) => {
-  _apiRequest('/r/' + reddit + '/comments/' + postid, (res)=>{
-    cb(res)
+  _apiRequest('/r/' + reddit + '/comments/' + postid, (res, err)=>{
+    cb(res, err)
   })
 }
 
 var getSubReddit = (reddit, cb) => {
-  _apiRequest('/r/' + reddit, (res)=>{
-    cb(res)
+  _apiRequest('/r/' + reddit, (res, err)=>{
+    cb(res, err)
   })
 }
 
