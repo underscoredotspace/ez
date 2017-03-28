@@ -8,6 +8,10 @@ var _newAccessToken = (cb) => {
     form: {grant_type: 'client_credentials'},
     auth: {user: process.env.CLIENT_ID, pass: process.env.CLIENT_SECRET}
   }
+  
+  return new Promise((resolve, reject) => {
+    
+  })
 
   request(options, function(err, response, body) {
     var oBody = JSON.parse(body)
