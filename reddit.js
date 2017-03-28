@@ -23,21 +23,21 @@ var _newAccessToken = () => {
   })
 }
 
-var access_token = (cb) => {
+var access_token = () => {
   // Check to see if valid token already stored
-  if (!_accessToken) {
-    // Request a new token from Reddit, the old one expired or will do in a minute
-    _newAccessToken().then((token) => {
-      cb(token)
-    })
-  } else {
-    // Token already requested from Reddit, still valid
-    cb(_accessToken)
-  }
+  return new Promise((resolve, reject) => {
+    if (!_accessToken) {
+      // Request a new token from Reddit, the old one expired or will do in a minute
+      resolve(_newAccessToken())
+    } else {
+      // Token already requested from Reddit, still valid
+      resolve(_accessToken)
+    }
+  })
 }
 
 var _apiRequest = (which, cb) => {
-  access_token((token)=>{
+  access_token().then((token)=>{
     var options = {
       url: 'https://oauth.reddit.com' + which,
       auth: {bearer: token},
