@@ -24,6 +24,7 @@ var _newAccessToken = () => {
 }
 
 var access_token = (cb) => {
+  // Check to see if valid token already stored
   if (!_accessToken) {
     // Request a new token from Reddit, the old one expired or will do in a minute
     _newAccessToken().then((token) => {
