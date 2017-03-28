@@ -11,7 +11,7 @@ var _newAccessToken = () => {
     }
     request(options, function(err, response, body) {
       // if (err) {
-        reject(err)
+        reject({err: 'cunt'})
       // }
       var oBody = JSON.parse(body)
       setTimeout(() => {
@@ -50,7 +50,7 @@ var _apiRequest = (which, cb) => {
     request(options, (err, res, body)=>{
       cb(JSON.parse(body), null)
     })
-  }).catch((err)=>{
+  }).catch((err) => {
     cb(null, err)
   })
 }
@@ -63,6 +63,7 @@ var getComments = (reddit, postid, cb) => {
 
 var getSubReddit = (reddit, cb) => {
   _apiRequest('/r/' + reddit, (res, err)=>{
+    console.log(err)
     cb(res, err)
   })
 }

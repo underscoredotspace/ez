@@ -22,7 +22,7 @@ angular.module('reddit', [])
         pre: function(scope, element, attribs) {
           element.bind('click', function(e) {
             r.subReddit(attribs.rSub, function(data) {
-              console.log(data.data)
+                console.log(data)
             })
           })
         }
