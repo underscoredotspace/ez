@@ -3,7 +3,7 @@ const request = require('request')
 
 function getLatest() {
   return new Promise((resolve, reject) => {
-    const options = {url: 'https://eztv.ag/api/get-torrents?limit=10&page=1'}
+    const options = {url: 'https://eztv.ag/api/get-torrents?limit=100&page=1'}
 
     request(options, (err, res, body) => {
       if (err) {

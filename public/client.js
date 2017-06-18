@@ -23,7 +23,8 @@ function eztvController($scope, e) {
     if (res.err) {
       console.log(res.err)
     } else {
-      $scope.torrets = res.torrents
+      console.log(res)
+      $scope.torrents = res.data
     }
   })
 }
