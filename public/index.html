@@ -1,11 +1,11 @@
-<html>
+<html ng-app="eztv">
   <head>
     <title>Home!</title>
     <script src="angularjs/angular.min.js"></script>
   </head>
-  <body ng-app="eztv">
-    <div ng-controller="eztvget">
-      
+  <body ng-controller="eztvget">
+    <div ng-repeat="torrent in torrents">
+      <a ng-href{{torrent.magnet_url}}
     </div>
     
     <script src="client.js"></script>

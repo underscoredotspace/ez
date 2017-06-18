@@ -2,12 +2,12 @@ window.angular.module('eztv', [])
 
 .service('eztv', function($http) {
   return {
-    get: function(sub, cb) {
+    get: function(cb) {
       $http.get('/eztv').then(
         function(res) {
           cb({data: res.data})
         }, function(res) {
-          return ({error: res})
+          cb({error: res})
         }
       )
     }
@@ -16,15 +16,14 @@ window.angular.module('eztv', [])
 
 .controller('eztvget', eztvController)
 
-eztvController.$inject = ['eztv']
+eztvController.$inject = ['$scope', 'eztv']
 
-function eztvController(e) {
+function eztvController($scope, e) {
   e.get(res => {
     if (res.err) {
-      alert('there was an error')
       console.log(res.err)
     } else {
-      console.log(res.data)
+      $scope.torrets = res.torrents
     }
   })
 }

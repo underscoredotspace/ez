@@ -5,11 +5,11 @@ function getLatest() {
   return new Promise((resolve, reject) => {
     const options = {url: 'https://eztv.ag/api/get-torrents?limit=10&page=1'}
 
-    request(options, (err, res, body)=>{
+    request(options, (err, res, body) => {
       if (err) {
-        return reject(err)
+        reject(err)
       } else {
-        return resolve(JSON.parse(body)) 
+        resolve(JSON.parse(body)) 
       }
     })
   })

@@ -12,9 +12,10 @@ app.use((req, res, next) =>{
 app.get('/eztv', (req, res) => {
   r.getLatest()
   .then(eztv => {
-    res.json(eztv.data.children)
-  })
-  .catch(err => {
+    console.log('here')
+    res.json(eztv.torrents)
+  }).catch(err => {
+    console.log(err)
     res.sendStatus(500).json({err: err})
   })
 })
