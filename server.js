@@ -10,9 +10,13 @@ app.use((req, res, next) =>{
 })
 
 app.get('/eztv', (req, res) => {
-  r.getLatest().then(eztv => 
-      res.json(eztv.data.children)
-  }).catch(err => res.sendStatus(500).json({err: err}))
+  r.getLatest()
+  .then(eztv => {
+    res.json(eztv.data.children)
+  })
+  .catch(err => {
+    res.sendStatus(500).json({err: err})
+  })
 })
 
 app.use(express.static('public'),express.static('bower_components'))

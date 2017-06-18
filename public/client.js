@@ -1,9 +1,9 @@
-angular.module('reddit', [])
+window.angular.module('eztv', [])
 
-.service('r', function($http) {
+.service('eztv', function($http) {
   return {
-    subReddit: function(sub, cb) {
-      $http.get('/r/' + sub).then(
+    get: function(sub, cb) {
+      $http.get('/eztv').then(
         function(res) {
           cb({data: res.data})
         }, function(res) {
@@ -14,19 +14,17 @@ angular.module('reddit', [])
   }
 })
 
-.directive('rSub', function(r) {
-  return {
-    restrict: 'A', 
-    compile: function() {
-      return {
-        pre: function(scope, element, attribs) {
-          element.bind('click', function(e) {
-            r.subReddit(attribs.rSub, function(data) {
-                console.log(data)
-            })
-          })
-        }
-      }
+.controller('eztvget', eztvController)
+
+eztvController.$inject = ['eztv']
+
+function eztvController(e) {
+  e.get(res => {
+    if (res.err) {
+      alert('there was an error')
+      console.log(res.err)
+    } else {
+      console.log(res.data)
     }
-  }
-})
+  })
+}
