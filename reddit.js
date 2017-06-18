@@ -1,72 +1,18 @@
 // var request-promise = require('request-promise-native')
-var request = require('request')
-var _accessToken = null
+const request = require('request')
 
-var _newAccessToken = () => {
+function getLatest() {
   return new Promise((resolve, reject) => {
-    var options = {
-      url: 'https://www.reddit.com/api/v1/access_token', 
-      method: 'POST',
-      form: {grant_type: 'client_credentials'},
-      auth: {user: process.env.CLIENT_ID, pass: process.env.CLIENT_SECRET}
-    }
-    request(options, function(err, response, body) {
-      if (err) {
-        reject(err)
-      }
-      var oBody = JSON.parse(body)
-      setTimeout(() => {
-        _accessToken = null
-      }, (Number(oBody.expires_in) * 1000) - 60000)
-      // Token removed 1 minute before it expires
-
-      _accessToken = oBody.access_token
-
-      resolve(_accessToken)
-    })
-  })
-}
-
-var access_token = () => {
-  // Check to see if valid token already stored
-  return new Promise((resolve, reject) => {
-    if (!_accessToken) {
-      // Request a new token from Reddit, the old one expired or will do in a minute
-      resolve(_newAccessToken())
-    } else {
-      // Token already requested from Reddit, still valid
-      resolve(_accessToken)
-    }
-  })
-}
-
-var _apiRequest = (which, cb) => {
-  access_token().then((token)=>{
-    var options = {
-      url: 'https://oauth.reddit.co.uk' + which,
-      auth: {bearer: token},
-      headers: {'User-Agent': 'https://glitch.me/~understood-bird/about by /u/_DotSpace'}
-    }
+    const options = {url: 'https://eztv.ag/api/get-torrents?limit=10&page=1'}
 
     request(options, (err, res, body)=>{
-      cb(JSON.parse(body), err)
+      if (err) {
+        return reject(err)
+      } else {
+        return resolve(JSON.parse(body)) 
+      }
     })
-  }).catch((err) => {
-    cb(null, err)
   })
 }
 
-var getComments = (reddit, postid, cb) => {
-  _apiRequest('/r/' + reddit + '/comments/' + postid, (res, err)=>{
-    cb(res, err)
-  })
-}
-
-var getSubReddit = (reddit, cb) => {
-  _apiRequest('/r/' + reddit, (res, err)=>{
-    console.log(err)
-    cb(res, err)
-  })
-}
-
-module.exports = {access_token, getSubReddit, getComments}
+module.exports = {getLatest}

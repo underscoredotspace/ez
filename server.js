@@ -9,32 +9,10 @@ app.use((req, res, next) =>{
   next()
 })
 
-app.use('/login/callback', (req, res) => {
-  res.json({ok: 'ok'})
-})
-
-app.get('/about', (req, res) => {
-  res.send('This is just  test for now, not for your use. ')
-})
-
-app.get('/r/:reddit', (req, res) => {
-  r.getSubReddit(req.params.reddit, (subreddit, err) => {
-    if (err) {
-      res.sendStatus(500).json({err: err})
-    } else {
-      res.json(subreddit.data.children)
-    }
-  })
-})
-
-app.get('/r/:reddit/comments/:postid', (req, res) => {
-  r.getComments(req.params.reddit, req.params.postid, (comments, err) => {
-    if (err) {
-      res.sendStatus(500).json({err: err})
-    } else {
-      res.json(comments)
-    }
-  })
+app.get('/eztv', (req, res) => {
+  r.getLatest().then(eztv => 
+      res.json(eztv.data.children)
+  }).catch(err => res.sendStatus(500).json({err: err}))
 })
 
 app.use(express.static('public'),express.static('bower_components'))
