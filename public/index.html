@@ -5,7 +5,7 @@
   </head>
   <body ng-controller="eztvget">
     <div ng-repeat="torrent in torrents">
-      <a ng-href="{{torrent.magnet_url}}">{{torrent.title}} ({{torrent.seeds}}/{{torrent.peers}})</a>
+      <a ng-href="{{torrent.magnet_url}}">{{torrent.title}}</a> [{{torrent.seeds}}/{{torrent.peers}}]
     </div>
     
     <script src="client.js"></script>

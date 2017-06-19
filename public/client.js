@@ -1,5 +1,13 @@
 window.angular.module('eztv', [])
 
+.config( [
+    '$compileProvider',
+    function( $compileProvider )
+    {   
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|magnet):/);
+    }
+])
+
 .service('eztv', function($http) {
   return {
     get: function(cb) {
