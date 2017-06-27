@@ -1,44 +1,68 @@
-window.angular.module('eztv', [])
+(function() {
+  window.angular.module('eztv', [])
+})();
 
-window.angular.module('eztv').config(options)
+(function() {
+  window.angular.module('eztv').config(config)
+  config.$inject = ['$compileProvider', '$routeProvider']
+  
+  function config($compileProvider, $routeProvider) {
+    routerConfig($routeProvider)
+    appConfig($compileProvider)
+  }
+  
+  function routerConfig($routeProvider) {
+    $routeProvider
+    .when('/', {
+      controller: 'eztvget',
+      controllerAs: 'vm'
+    })
+    .when('/:page', {
+      controller: 'eztvget',
+      controllerAs: 'vm'
+    })
+  }
 
-options.$inject = ['$compileProvider']
+  function appConfig($compileProvider) {
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|magnet):/)
+  }
+})();
 
-function options($compileProvider) {
-  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|magnet):/)
-}
+(function() {
+  window.angular.module('eztv').service('eztv', eztvService)          
+  eztvService.$inject = ['$http']
 
-window.angular.module('eztv').service('eztv', eztvS
-                                      
-function eztvService ($http) {
-  return {
-    get: function(page, cb) {
-      $http.get('/eztv').then(
-        function(res) {
-          cb({data: res.data})
-        }, function(res) {
-          cb({error: res})
-        }
-      )
+  function eztvService ($http) {
+    return {get}
+
+    function get(page, cb) {
+      $http.get('/eztv')
+      .then(
+      function(res) {
+        cb({data: res.data})
+      }, function(res) {
+        cb({error: res})
+      })
     }
   }
-})
+})();
 
-window.angular.module('eztv').controller('eztvget', eztvController)
+(function() {
+  window.angular.module('eztv').controller('eztvget', eztvController)
+  eztvController.$inject = ['$scope', 'eztv']
 
-eztvController.$inject = ['$scope', 'eztv']
+  function eztvController($scope, eztv) {
+    let page
 
-function eztvController($scope, eztv) {
-  let page
-  
-  
-  
-  eztv.get(page, res => {
-    if (res.err) {
-      console.log(res.err)
-    } else {
-      console.log(res)
-      $scope.torrents = res.data
-    }
-  })
-}
+
+
+    eztv.get(page, res => {
+      if (res.err) {
+        console.log(res.err)
+      } else {
+        console.log(res)
+        $scope.torrents = res.data
+      }
+    })
+  }
+})();
