@@ -12,15 +12,19 @@
   }
   
   function routerConfig($routeProvider) {
+    const vTemplate = `<div ng-repeat="torrent in torrents">
+      <a ng-href="{{torrent.magnet_url}}">{{torrent.title}}</a> [{{torrent.seeds}}/{{torrent.peers}}]
+      </div>`
     $routeProvider
     .when('/', {
       controller: 'eztvget',
       controllerAs: 'vm',
-      templage
+      template: vTemplate
     })
     .when('/:page', {
       controller: 'eztvget',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      template: vTemplate
     })
   }
 
@@ -36,8 +40,8 @@
   function eztvService ($http) {
     return {get}
 
-    function get(page, cb) {
-      $http.get('/eztv')
+    function get(page = '1', cb) {
+      $http.get('/eztv/' + page)
       .then(
       function(res) {
         cb({data: res.data})

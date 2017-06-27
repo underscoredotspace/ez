@@ -19,6 +19,7 @@ app.get(['/eztv', '/eztv/:page'], (req, res) => {
   
   if (req.params.hasOwnProperty('page')) {
     page = req.params.page
+    console.log({page})
   }
   
   eztv.get(page)
