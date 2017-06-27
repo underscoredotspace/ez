@@ -1,7 +1,7 @@
 // init project
 var express = require('express')
 var app = express()
-var r = require('./reddit')
+var eztv = require('./reddit')
 
 app.set('json spaces', 2);
 app.use((req, res, next) =>{
@@ -9,8 +9,14 @@ app.use((req, res, next) =>{
   next()
 })
 
-app.get('/eztv', (req, res) => {
-  r.getLatest()
+app.get(['/eztv', '/eztv/:page'], (req, res) => {
+  let page
+  
+  if (req.params.hasOwnProperty('page')) {
+    page = req.params.page
+  }
+  
+  eztv.get(page)
   .then(eztv => {
     console.log('here')
     res.json(eztv.torrents)

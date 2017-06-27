@@ -1,9 +1,9 @@
 // var request-promise = require('request-promise-native')
 const request = require('request')
 
-function getLatest() {
+function get(page = 1) {
   return new Promise((resolve, reject) => {
-    const options = {url: 'https://eztv.ag/api/get-torrents?limit=100&page=1'}
+    const options = {url: 'https://eztv.ag/api/get-torrents?limit=100&page=' + page}
 
     request(options, (err, res, body) => {
       if (err) {
@@ -15,4 +15,4 @@ function getLatest() {
   })
 }
 
-module.exports = {getLatest}
+module.exports = {get}
