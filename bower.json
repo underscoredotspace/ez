@@ -5,7 +5,8 @@
   ],
   "license": "CC-BY-NC-4.0",
   "dependencies": {
-    "angularjs": "^1.6.x"
+    "angular": "^1.6.x",
+    "angular-route": "^1.6.x"
   },
   "private": true
 }
