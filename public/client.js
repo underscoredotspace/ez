@@ -1,5 +1,5 @@
 (function() {
-  window.angular.module('eztv', [])
+  window.angular.module('eztv', ['ngRoute'])
 })();
 
 (function() {
@@ -15,7 +15,8 @@
     $routeProvider
     .when('/', {
       controller: 'eztvget',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      templage
     })
     .when('/:page', {
       controller: 'eztvget',
@@ -49,12 +50,16 @@
 
 (function() {
   window.angular.module('eztv').controller('eztvget', eztvController)
-  eztvController.$inject = ['$scope', 'eztv']
+  eztvController.$inject = ['$scope', '$routeParams','eztv']
 
-  function eztvController($scope, eztv) {
+  function eztvController($scope, $routeParams, eztv) {
     let page
 
-
+    if (window.angular.isDefined($routeParams.page)) {
+      page = $routeParams.page
+    }
+    
+    console.log(page)
 
     eztv.get(page, res => {
       if (res.err) {

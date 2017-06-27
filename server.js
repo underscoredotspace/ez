@@ -1,13 +1,18 @@
 // init project
 var express = require('express')
 var app = express()
-var eztv = require('./reddit')
+var eztv = require('./eztv')
 
 app.set('json spaces', 2);
 app.use((req, res, next) =>{
   console.log(req.method, req.url)
   next()
 })
+
+app.use(
+  express.static('node_modules/angular'),
+  express.static('node_modules/angular-route')
+)
 
 app.get(['/eztv', '/eztv/:page'], (req, res) => {
   let page
@@ -18,7 +23,6 @@ app.get(['/eztv', '/eztv/:page'], (req, res) => {
   
   eztv.get(page)
   .then(eztv => {
-    console.log('here')
     res.json(eztv.torrents)
   }).catch(err => {
     console.log(err)
