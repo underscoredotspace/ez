@@ -12,20 +12,13 @@
   }
   
   function routerConfig($routeProvider) {
-    const vTemplate = `<div ng-repeat="torrent in torrents">
-      <a ng-href="{{torrent.magnet_url}}">{{torrent.title}}</a> [{{torrent.seeds}}/{{torrent.peers}}]
-      </div>`
     $routeProvider
-    .when('/', {
-      controller: 'eztvget',
-      controllerAs: 'vm',
-      template: vTemplate
-    })
     .when('/:page', {
       controller: 'eztvget',
       controllerAs: 'vm',
-      template: vTemplate
+      templateUrl: 'template.html'
     })
+    .otherwise({redirectTo: '/1'})
   }
 
   function appConfig($compileProvider) {
