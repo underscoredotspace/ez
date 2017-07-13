@@ -55,6 +55,7 @@
     if (window.angular.isDefined($routeParams.page)) {
       vm.page = Number($routeParams.page)
       vm.next = vm.page + 1
+      vm.prev = vm.page - 1
     }
 
     eztv.get(vm.page, res => {
