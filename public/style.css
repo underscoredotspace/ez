@@ -1,4 +1,28 @@
-.main {
+* {
+  margin: 0;
+}
+
+header, footer, .list {
+  padding: 20px;
+}
+
+header, footer {
   display:flex;
-  flex
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.list {
+  margin: auto;
+}
+
+.main {
+  height: 100vh;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.list {
+  display: block;
 }

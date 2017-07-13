@@ -3,9 +3,10 @@
     <a ng-href="{{ '#!/' + vm.prev }}" ng-if="vm.prev > 0">{{ 'Page ' + vm.prev }}</a>
     <a ng-href="{{ '#!/' + vm.next }}">{{ 'Page ' + vm.next }}</a>
   </header>
-
-  <div ng-repeat="torrent in vm.torrents">
-    <a ng-href="{{torrent.magnet_url}}">{{torrent.title}}</a> [{{torrent.seeds}}/{{torrent.peers}}]
+  <div class="list">
+    <div ng-repeat="torrent in vm.torrents">
+      <a ng-href="{{torrent.magnet_url}}">{{torrent.title}}</a> [{{torrent.seeds}}/{{torrent.peers}}]
+    </div>
   </div>
 
   <footer>
