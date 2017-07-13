@@ -5,7 +5,7 @@
   </header>
   <div class="list">
     <div ng-repeat="torrent in vm.torrents">
-      <a ng-href="{{torrent.magnet_url}}">{{torrent.title}}</a> [{{torrent.seeds}}/{{torrent.peers}}]
+      {{torrent.date_released_unix*1000|date:'d/M HHmm'}} - <a ng-href="{{torrent.magnet_url}}">{{torrent.title}}</a> [{{torrent.seeds}}/{{torrent.peers}}]
     </div>
   </div>
 
