@@ -47,23 +47,22 @@
 
 (function() {
   window.angular.module('eztv').controller('eztvget', eztvController)
-  eztvController.$inject = ['$scope', '$routeParams','eztv']
+  eztvController.$inject = ['$routeParams','eztv']
 
-  function eztvController($scope, $routeParams, eztv) {
-    let page
+  function eztvController($routeParams, eztv) {
+    const vm = this
 
     if (window.angular.isDefined($routeParams.page)) {
-      page = $routeParams.page
+      vm.page = Number($routeParams.page)
+      vm.next = vm.page + 1
     }
-    
-    console.log(page)
 
-    eztv.get(page, res => {
+    eztv.get(vm.page, res => {
       if (res.err) {
         console.log(res.err)
       } else {
         console.log(res)
-        $scope.torrents = res.data
+        vm.torrents = res.data
       }
     })
   }
