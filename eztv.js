@@ -10,7 +10,12 @@ function get(page = 1, limit = 20) {
       if (res.statusCode !== 200) {
         reject(res.status)
       } else {
-        resolve(JSON.parse(res.body)) 
+        res.setEncoding('utf8');
+        let rawData = '';
+        res.on('data', (chunk) => { rawData += chunk; });
+        res.on('end', () => {
+          resolve(JSON.parse(rawData))
+        })
       }
     })
   })
