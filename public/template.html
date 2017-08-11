@@ -7,7 +7,7 @@
     <div><a ng-href="{{ '#!/' + vm.next + '/' + vm.search  }}">{{ 'Page ' + vm.next }}</a></div>
   </header>
   <div class="list">
-    <div ng-repeat="torrent in vm.torrents | filter:vm.search as filteredtorrents">
+    <div ng-repeat="torrent in vm.torrents | filter:{title:vm.search} as filteredtorrents">
       {{torrent.date_released_unix*1000|date:'d/M HHmm'}} - <a ng-href="{{torrent.magnet_url}}">{{torrent.title}}</a> [{{torrent.seeds}}/{{torrent.peers}}]
     </div>
     <div ng-if="!vm.torrents">Loading...</div>
