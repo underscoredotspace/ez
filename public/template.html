@@ -4,7 +4,7 @@
     <div>
       <input data-ng-model="vm.search" placeholder="Search">
     </div>
-    <div><a ng-href="{{ '#!/' + vm.next }}">{{ 'Page ' + vm.next }}</a></div>
+    <div><a ng-href="{{ '#!/' + vm.next  }}">{{ 'Page ' + vm.next }}</a></div>
   </header>
   <div class="list">
     <div ng-repeat="torrent in vm.torrents | filter:vm.search">
@@ -13,7 +13,9 @@
   </div>
 
   <footer>
-    <div><a ng-href="{{ '#!/' + vm.prev + '?=sear }}" ng-if="vm.prev > 0">{{ 'Page ' + vm.prev }}</a></div>
+    <div><a ng-href="{{ '#!/' + vm.prev + vm.search?('?s='+vm.search) }" ng-if="vm.prev > 0">{{ 'Page ' + vm.prev }}</a></div>
     <div><a ng-href="{{ '#!/' + vm.next }}">{{ 'Page ' + vm.next }}</a></div>
   </footer>
 </div>
+
+${vm.search?'?s='+vm.search:''}
