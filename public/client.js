@@ -18,6 +18,11 @@
       controllerAs: 'vm',
       templateUrl: 'template.html'
     })
+    .when('/:page/:search', {
+      controller: 'eztvget',
+      controllerAs: 'vm',
+      templateUrl: 'template.html'
+    })
     .otherwise({redirectTo: '/1'})
   }
 
@@ -52,6 +57,10 @@
   function eztvController($routeParams, eztv) {
     const vm = this
 
+    if (angular.isDefined($routeParams.search)) {
+      vm.search = $routeParams.search
+    }
+    
     if (window.angular.isDefined($routeParams.page)) {
       vm.page = Number($routeParams.page)
       vm.next = vm.page + 1
