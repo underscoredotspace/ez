@@ -25,4 +25,5 @@ header, footer {
 
 .list {
   display: block;
+  overflow-y: auto;
 }
