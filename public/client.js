@@ -57,7 +57,7 @@
   function eztvController($routeParams, eztv) {
     const vm = this
 
-    if (angular.isDefined($routeParams.search)) {
+    if (window.angular.isDefined($routeParams.search)) {
       vm.search = $routeParams.search
     }
     
