@@ -68,9 +68,10 @@
     }
 
     eztv.get(vm.page, res => {
+      vm.error = false
       if (res.err) {
         console.log(res.err)
-        vm.torrents = [{title:'Error getting data'}]
+        vm.error = true
       } else {
         console.log(res)
         vm.torrents = res.data
