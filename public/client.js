@@ -39,6 +39,7 @@
     return {get}
 
     function get(page = '1', cb) {
+       cb({error: 'fuck'})
       $http.get('/eztv/' + page)
       .then(
       function(res) {
@@ -68,14 +69,9 @@
     }
 
     eztv.get(vm.page, res => {
-      console.log(res)
-      vm.error = false
       if (res.err) {
-        console.log(res.err)
-        vm.error = true
-        console.log(vm)
+        vm.torrents = {err:true}
       } else {
-        console.log(res)
         vm.torrents = res.data
       }
     })

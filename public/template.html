@@ -12,7 +12,7 @@
     </div>
     <div ng-if="!vm.torrents">Loading...</div>
     <div ng-if="vm.torrents && filteredtorrents.length===0">No results</div>
-    <div ng-if="vm.error">Error getting data</div>
+    <div ng-if="vm.torrents.err">Error getting data</div>
   </div>
 
   <footer>
