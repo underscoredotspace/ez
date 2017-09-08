@@ -39,7 +39,6 @@
     return {get}
 
     function get(page = '1', cb) {
-       cb({error: 'fuck'})
       $http.get('/eztv/' + page)
       .then(
       function(res) {
