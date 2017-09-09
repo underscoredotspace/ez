@@ -40,12 +40,8 @@
 
     function get(page = '1', cb) {
       $http.get('/eztv/' + page)
-      .then(
-      res => {
-        cb({data: res.data})
-      }).catch(res => {
-        cb({error: res})
-      })
+        .then( res => cb({data: res.data}))
+        .catch(res => cb({error: res}))
     }
   }
 })();

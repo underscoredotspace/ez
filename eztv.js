@@ -6,7 +6,6 @@ function get(page = 1, limit = 50) {
 
     request.get(url, res => {
       console.log(res)
-      // reject('fuck')
       if (res.statusCode !== 200) {
         reject(res.status)
       } else {
