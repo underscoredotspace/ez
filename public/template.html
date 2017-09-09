@@ -2,13 +2,13 @@
   <header>
     <div><a ng-href="{{ '#!/' + vm.prev + '/' + vm.search  }}" ng-if="vm.prev > 0">{{ 'Page ' + vm.prev }}</a></div>
     <div>
-      <input data-ng-model="vm.search" placeholder="Search">
+      <input data-ng-model="vm.search" placeholder="Search">&nbsp;
     </div>
     <div><a ng-href="{{ '#!/' + vm.next + '/' + vm.search  }}">{{ 'Page ' + vm.next }}</a></div>
   </header>
   <div class="list">
     <div ng-repeat="torrent in vm.torrents | filter:{title:vm.search} as filteredtorrents">
-      {{torrent.date_released_unix*1000|date:'d/M HHmm'}} - <a ng-href="{{torrent.magnet_url}}">{{torrent.title}}</a> [{{torrent.seeds}}/{{torrent.peers}}]
+      {{torrent.date_released_unix*1000|date:'EEE d/M HHmm'}} - <a ng-href="{{torrent.magnet_url}}">{{torrent.title}}</a> [{{torrent.seeds}}/{{torrent.peers}}]
     </div>
     <div ng-if="!vm.torrents">Loading...</div>
     <div ng-if="vm.torrents && filteredtorrents.length===0">No results</div>
@@ -17,6 +17,9 @@
 
   <footer>
     <div><a ng-href="{{ '#!/' + vm.prev + '/' + vm.search }}" ng-if="vm.prev > 0">{{ 'Page ' + vm.prev }}</a></div>
+    <div ng-if="vm.torrents">
+      {{ vm.from|date:'EEE d/M HHmm' }} to {{ vm.to|date:'EEE d/M HHmm' }}
+    </div>
     <div><a ng-href="{{ '#!/' + vm.next + '/' + vm.search  }}">{{ 'Page ' + vm.next }}</a></div>
   </footer>
 </div>
