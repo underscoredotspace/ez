@@ -40,7 +40,7 @@
 
     function get(page = '1', cb) {
       $http.get('/eztv/' + page)
-        .then( res => cb({data: res.data}))
+        .then(res => cb({data: res.data}))
         .catch(res => cb({error: res}))
     }
   }
@@ -68,6 +68,8 @@
         vm.torrents = {err:true}
       } else {
         vm.torrents = res.data
+        vm.from = vm.torrents[0].date_released_unix * 1000
+        vm.to = vm.torrents[vm.torrents.length-1].date_released_unix * 1000
       }
     })
   }
