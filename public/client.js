@@ -41,9 +41,9 @@
     function get(page = '1', cb) {
       $http.get('/eztv/' + page)
       .then(
-      function(res) {
+      res => {
         cb({data: res.data})
-      }, function(res) {
+      }).catch(res => {
         cb({error: res})
       })
     }
@@ -68,7 +68,7 @@
     }
 
     eztv.get(vm.page, res => {
-      if (res.err) {
+      if (res.error) {
         vm.torrents = {err:true}
       } else {
         vm.torrents = res.data
